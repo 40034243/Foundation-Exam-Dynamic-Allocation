@@ -1,0 +1,154 @@
+\documentclass{article}
+
+\usepackage{amsmath}  % for advanced math typesetting
+\usepackage{graphicx} % for including graphics
+\usepackage{hyperref} % for including hyperlinks
+
+\newcommand{\R}{\mathbb{R}}
+
+\begin{document}
+
+\title{My Document with Table of Contents}
+\author{Your Name}
+\date{\today}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Reading Files}
+
+\subsection{Team/Player Struct}
+
+\textbf{Date:} August 27, 2022 
+
+\textbf{Link:} \url{https://www.cs.ucf.edu/registration/exm/fall2022/FE-Aug22.pdf} 
+
+\textbf{Solution Link:} \url{https://www.cs.ucf.edu/registration/exm/fall2022/FE-Aug22-Sol.pdf} 
+
+Description: This problem relies on the following Player and the Team struct definitions:
+
+\begin{verbatim}
+typedef struct Player
+{
+    char pname[50];   //player's name
+    char country[50]; //player's country
+    int age;
+} Player;
+\end{verbatim}
+
+\begin{verbatim}
+typedef struct Team
+{
+    char tname[50];  // team's name
+    Player *players; // all players on the team
+    int numPlayers;  // number of players on the team
+} Team;
+\end{verbatim}
+
+
+We are making a team of players from multiple countries. There is a text file containing the details of a team, where the first line of the file contains the team name, followed by a single space, followed by the number of players on the team, N. The next N lines contain the data for N players. Each player line contains three tokens, each separated by a space: the player name, country, and age (as an integer). Each team name, player name, and country will be a single-word string (no spaces) with a maximum length of 49. Here is a sample file:
+
+\begin{verbatim}
+NewKnights 5 
+Hannan USA 22 
+Mabel India 21
+Samarina Bangladesh 21
+Tamsen USA 21 
+Susan Mexico 22
+\end{verbatim}
+
+Write a function that takes a file pointer and then returns a pointer to a dynamically allocated Team struct with all the information loaded into it. You can assume that the file is already opened in read mode and ready to read from the beginning of the file. Do not worry about closing the input file with fclose() when you finish reading it. Assume the function that opened the file and called createTeam() will close the file.
+
+\begin{verbatim}
+Team *createTeam(FILE *fp) {}
+\end{verbatim}
+
+
+
+
+
+
+\newpage
+
+\section{Miscellaneous}
+\subsection{Pascal's Triangle}
+
+\textbf{Date:} May 20, 2023 \\
+
+\textbf{Link:} \url{https://www.cs.ucf.edu/registration/exm/spr2023/FE-Jan23.pdf} \\
+
+\textbf{Solution Link:} \url{https://www.cs.ucf.edu/registration/exm/spr2023/FE-Jan23-Sol.pdf} \\
+
+Description: Using 0-based indexing, on row i of Pascal’s Triangle, there are i+1 positive integer values. One way we can efficiently store the triangle is to allocate the correct amount of memory for each row. Here is a picture of the first five rows of the triangle (rows 0 through 4, inclusive.):
+If the name of the array is tri, then the rule to fill in the entries in the table are as follows:
+tri[i][0] = 1, for all positive ints i
+tri[i][i] = 1, for all positive ints i
+tri[i][j] = tri[i-1][j-1]+tri[i-1][j], for all ints j, 0 < j < i
+Write a function that takes in an integer, n, dynamically allocates an array of n arrays, where the ith array (0-based) is allocated to store exactly i+1 ints, fills the contents of the array with the corresponding values of Pascal’s Triangle as designated above, and returns a pointer to the array of arrays. You may assume that 1 < n < 31.
+
+\begin{verbatim}
+int** getPascalsTriangle(int n) {}
+\end{verbatim}
+
+\newpage
+
+\section{"Problems with Code"}
+Here is some information about similar things.
+
+\subsection{Problem(s) with Code}
+
+\textbf{Date:} May 20, 2023 \\
+
+\textbf{Link:} \url{https://www.cs.ucf.edu/registration/exm/sum2023/FE-May23.pdf} \\
+
+\textbf{Solution Link:} \url{https://www.cs.ucf.edu/registration/exm/sum2023/FE-May23-Sol.pdf} \\
+
+\subsubsection*{Problem 2) (5 pts) ALG (Dynamic Memory Management in C)}
+
+Suppose we have an array to store all of the holiday presents we have purchased for this year. Now that the holidays are over and all the presents have been given out, we need to delete our list. Our array is a dynamically allocated array of structures that contains the name of each present and the price. The name of the present is a dynamically allocated string to support different lengths of strings. Write a function called \texttt{delete\_present\_list} that will take in the present array and free all the memory space that the array previously took up. Your function should take 2 parameters: the array called \texttt{present\_list} and an integer, \texttt{num}, representing the number of presents in the list and return a null pointer representing the now deleted list. (Note: The array passed to the function may be pointing to NULL, so that case should be handled appropriately.)
+
+\begin{verbatim}
+struct present {
+    char *present_name;
+    float price;
+}; 
+
+struct present* delete_present_list(struct present* present_list, int num) {
+    for (int i = 0; i < num; i++) {
+        free(present_list[i].present_name);
+    }
+    free(present_list);
+    return NULL;
+}
+\end{verbatim}
+
+
+\newpage
+
+\section{"Freeing Space"}
+
+\subsection{Freeing Space}
+
+\textbf{Date:} August 28, 2021 \\
+
+\textbf{Problem Link:} \url{https://www.cs.ucf.edu/registration/exm/fall2021/FE-Aug21.pdf} \\
+
+\textbf{Solution Link:} \url{https://www.cs.ucf.edu/registration/exm/fall2021/FE-Aug21-Sol.pdf} \\
+\\
+\textbf{Problem 1) (10 pts) DSN (Dynamic Memory Management in C)}
+
+Suppose we have an array to store all of the holiday presents we have purchased for this year. Now that the holidays are over and all the presents have been given out, we need to delete our list. Our array is a dynamically allocated array of structures that contains the name of each present and the price. The name of the present is a dynamically allocated string to support different lengths of strings. Write a function called \texttt{delete\_present\_list} that will take in the present array and free all the memory space that the array previously took up. Your function should take 2 parameters: the array called \texttt{present\_list} and an integer, \texttt{num}, representing the number of presents in the list and return a null pointer representing the now deleted list. (Note: The array passed to the function may be pointing to NULL, so that case should be handled appropriately.)
+
+\begin{verbatim}
+struct present {
+    char *present_name;
+    float price;
+}; 
+struct present* delete_present_list(struct present* present_list, int num) {}
+\end{verbatim}
+
+\end{document}
+
